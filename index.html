@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#090b13">
+  <title>Xaden.Ai — Your personal AI</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{color-scheme:dark;--bg:#090b13;--panel:#111522;--panel2:#171d2d;--line:#252c40;--muted:#929bb1;--text:#f4f6ff;--accent:#9b8cff;--accent2:#5ed9c5}
+    *{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 50% -20%,#29204b 0%,transparent 48%),var(--bg);color:var(--text);font-family:"DM Sans",sans-serif;min-height:100vh}
+    button,textarea{font:inherit}.app{min-height:100vh;display:grid;grid-template-columns:260px 1fr;max-width:1500px;margin:auto}
+    aside{border-right:1px solid var(--line);padding:25px 18px;display:flex;flex-direction:column;gap:24px;background:#0c0f19b8}
+    .brand{display:flex;align-items:center;gap:12px;padding:4px 8px}.logo{width:39px;height:39px;border-radius:13px;background:linear-gradient(135deg,#a998ff,#5ed9c5);display:grid;place-items:center;color:#101321;font-family:"Space Grotesk";font-weight:700;font-size:20px;box-shadow:0 6px 28px #8d7cff35}
+    .brandname{font:700 19px "Space Grotesk";letter-spacing:-.6px}.brandname span{color:var(--accent)}
+    .newchat{border:1px solid #4b426e;background:#17152a;color:#eeeaff;border-radius:12px;padding:12px 14px;text-align:left;cursor:pointer;transition:.2s}.newchat:hover{background:#211d3b}
+    .side-label{font-size:11px;color:#69738c;text-transform:uppercase;letter-spacing:1.5px;padding:0 9px}
+    .side-note{font-size:13px;line-height:1.65;color:var(--muted);padding:0 9px}.side-bottom{margin-top:auto;border-top:1px solid var(--line);padding:17px 8px 0;color:#7f89a0;font-size:12px;line-height:1.6}
+    main{display:flex;flex-direction:column;min-width:0;min-height:100vh}.topbar{height:72px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 34px;background:#0c0f1980}
+    .top-title{font:600 14px "Space Grotesk";color:#dce0f1}.status{display:flex;align-items:center;gap:8px;color:#aab4c9;font-size:12px}.dot{width:7px;height:7px;background:var(--accent2);border-radius:50%;box-shadow:0 0 12px var(--accent2)}
+    .chat-area{width:min(850px,100%);margin:0 auto;padding:36px 28px 20px;flex:1;display:flex;flex-direction:column}
+    .welcome{margin:auto 0 28px;text-align:center;padding:40px 0 10px}.orb{width:68px;height:68px;margin:0 auto 22px;border-radius:23px;background:linear-gradient(135deg,#a998ff,#5ed9c5);display:grid;place-items:center;color:#111321;font:700 30px "Space Grotesk";box-shadow:0 12px 55px #9b8cff33}
+    h1{font:600 clamp(30px,5vw,46px) "Space Grotesk";letter-spacing:-1.8px;margin:0 0 12px}.gradient{background:linear-gradient(90deg,#c2b8ff,#70e4d1);-webkit-background-clip:text;background-clip:text;color:transparent}
+    .subtitle{color:var(--muted);font-size:15px;line-height:1.6;margin:0 auto;max-width:480px}
+    .suggestions{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;max-width:620px;width:100%;margin:28px auto 0}.suggestion{background:#111522a8;border:1px solid var(--line);color:#dce1f1;border-radius:13px;padding:14px;text-align:left;cursor:pointer;font-size:13px;transition:.2s}.suggestion:hover{border-color:#7669bb;background:#191a2c}.suggestion b{display:block;font-size:13px;margin-bottom:5px;color:#f4f3ff}.suggestion span{color:#8993aa}
+    .messages{display:flex;flex-direction:column;gap:20px;padding-bottom:25px}.message{display:flex;gap:12px;align-items:flex-start;max-width:100%}.message.user{flex-direction:row-reverse}.avatar{width:30px;height:30px;flex:0 0 30px;border-radius:10px;background:#25223d;color:#c9c0ff;display:grid;place-items:center;font:700 12px "Space Grotesk"}.user .avatar{background:#203b3a;color:#85e6d6}.bubble{max-width:min(680px,calc(100% - 45px));padding:13px 16px;border:1px solid var(--line);background:#131827;border-radius:4px 15px 15px 15px;font-size:14px;line-height:1.7;white-space:pre-wrap;overflow-wrap:anywhere}.user .bubble{background:#25213c;border-color:#3d365d;border-radius:15px 4px 15px 15px}
+    .typing{color:#aab2c6}.composer-wrap{position:sticky;bottom:0;padding:12px 28px 24px;background:linear-gradient(transparent,var(--bg) 22%)}.composer{width:min(790px,100%);margin:auto;border:1px solid #343b54;background:#141a29;border-radius:18px;padding:10px 11px 10px 17px;display:flex;align-items:flex-end;gap:12px;box-shadow:0 12px 45px #0005}.composer:focus-within{border-color:#8274d2}.composer textarea{resize:none;outline:0;border:0;background:transparent;color:var(--text);width:100%;max-height:150px;min-height:28px;padding:5px 0;line-height:1.5;font-size:14px}.composer textarea::placeholder{color:#737e96}.send{width:39px;height:39px;flex:0 0 39px;border:0;border-radius:12px;background:linear-gradient(135deg,#aa9aff,#6bdcc9);color:#111321;font-size:18px;font-weight:700;cursor:pointer}.send:disabled{opacity:.45;cursor:not-allowed}.hint{text-align:center;color:#69738a;font-size:11px;margin:10px 0 0}.error{color:#ffb4bd}
+    @media(max-width:720px){.app{grid-template-columns:1fr}aside{display:none}.topbar{height:60px;padding:0 18px}.chat-area{padding:22px 16px 12px}.welcome{padding-top:34px}.composer-wrap{padding:10px 14px 18px}.suggestions{grid-template-columns:1fr}.suggestion{padding:12px}.subtitle{font-size:14px}.orb{width:58px;height:58px;border-radius:19px}}
+  </style>
+</head>
+<body>
+<div class="app">
+  <aside>
+    <div class="brand"><div class="logo">X</div><div class="brandname">Xaden<span>.Ai</span></div></div>
+    <button class="newchat" id="newChat">＋ &nbsp; New conversation</button>
+    <div class="side-label">YOUR ASSISTANT</div>
+    <div class="side-note">A personal space to think, plan, learn and create. Ask anything and let's figure it out together.</div>
+    <div class="side-bottom">Xaden.Ai<br>Personal AI assistant<br><span style="color:#59637b">Your ideas, one conversation away.</span></div>
+  </aside>
+  <main>
+    <header class="topbar"><div class="top-title">Personal assistant</div><div class="status"><span class="dot"></span><span id="statusText">Checking connection…</span></div></header>
+    <section class="chat-area">
+      <div class="welcome" id="welcome">
+        <div class="orb">X</div>
+        <h1>Meet <span class="gradient">Xaden.Ai</span></h1>
+        <p class="subtitle">Your personal AI assistant. Ask questions, make plans, learn something new, or turn an idea into reality.</p>
+        <div class="suggestions">
+          <button class="suggestion" data-prompt="Help me plan a productive day."><b>✦ Plan my day</b><span>Build a simple daily routine</span></button>
+          <button class="suggestion" data-prompt="Explain a difficult topic in very easy words."><b>⌁ Learn something</b><span>Make a tricky topic easy</span></button>
+          <button class="suggestion" data-prompt="Give me five creative ideas for a project."><b>✧ Get creative</b><span>Explore fresh ideas</span></button>
+          <button class="suggestion" data-prompt="Help me write a clear and friendly message."><b>✎ Write with me</b><span>Draft or improve some text</span></button>
+        </div>
+      </div>
+      <div class="messages" id="messages" aria-live="polite"></div>
+    </section>
+    <div class="composer-wrap">
+      <form class="composer" id="chatForm">
+        <textarea id="prompt" rows="1" placeholder="Message Xaden.Ai…" autocomplete="off"></textarea>
+        <button class="send" id="send" aria-label="Send message">↑</button>
+      </form>
+      <p class="hint">Xaden.Ai can make mistakes. Check important information.</p>
+    </div>
+  </main>
+</div>
+<script>
+  const messagesEl = document.getElementById("messages");
+  const welcome = document.getElementById("welcome");
+  const input = document.getElementById("prompt");
+  const send = document.getElementById("send");
+  const history = [];
+  let busy = false;
+
+  async function checkStatus() {
+    try {
+      const r = await fetch("/api/status");
+      const data = await r.json();
+      document.getElementById("statusText").textContent = data.ready ? "AI connected" : "Setup needed";
+    } catch { document.getElementById("statusText").textContent = "Server unavailable"; }
+  }
+
+  function addMessage(role, content, extraClass = "") {
+    welcome.style.display = "none";
+    const row = document.createElement("div");
+    row.className = `message ${role} ${extraClass}`;
+    const avatar = document.createElement("div");
+    avatar.className = "avatar";
+    avatar.textContent = role === "user" ? "Y" : "X";
+    const bubble = document.createElement("div");
+    bubble.className = "bubble";
+    bubble.textContent = content;
+    row.append(avatar, bubble);
+    messagesEl.appendChild(row);
+    row.scrollIntoView({ behavior: "smooth", block: "end" });
+    return { row, bubble };
+  }
+
+  async function sendMessage(text) {
+    const content = text.trim();
+    if (!content || busy) return;
+    history.push({ role: "user", content });
+    addMessage("user", content);
+    input.value = "";
+    input.style.height = "auto";
+    busy = true; send.disabled = true;
+    const typing = addMessage("assistant", "Xaden.Ai is thinking…", "typing");
+    try {
+      const response = await fetch("/api/chat", {
+        method: "POST", headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ messages: history })
+      });
+      const data = await response.json();
+      if (!response.ok) throw new Error(data.error || "Request failed.");
+      typing.row.remove();
+      history.push({ role: "assistant", content: data.reply });
+      addMessage("assistant", data.reply);
+    } catch (err) {
+      typing.bubble.textContent = err.message || "Could not connect. Please try again.";
+      typing.bubble.classList.add("error");
+    } finally {
+      busy = false; send.disabled = false; input.focus();
+    }
+  }
+
+  document.getElementById("chatForm").addEventListener("submit", e => {
+    e.preventDefault(); sendMessage(input.value);
+  });
+  input.addEventListener("input", () => {
+    input.style.height = "auto";
+    input.style.height = Math.min(input.scrollHeight, 150) + "px";
+  });
+  input.addEventListener("keydown", e => {
+    if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); document.getElementById("chatForm").requestSubmit(); }
+  });
+  document.querySelectorAll("[data-prompt]").forEach(btn => btn.addEventListener("click", () => sendMessage(btn.dataset.prompt)));
+  document.getElementById("newChat").addEventListener("click", resetChat);
+  function resetChat() { history.length = 0; messagesEl.innerHTML = ""; welcome.style.display = ""; input.focus(); }
+  checkStatus();
+</script>
+</body>
+</html>
